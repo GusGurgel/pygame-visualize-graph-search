@@ -1,0 +1,9 @@
+{
+    "button": {
+        "misc": {
+            "shape": "rounded_rectangle",
+            "shape_corner_radius": "5",
+            "border_width": "2"
+        }
+    }
+}
