@@ -7,11 +7,11 @@ from platform import system
 # [ APP ]
 WINDOW_WIDTH, WINDOW_HEIGHT = (1200, 800)
 WINDOW_TITLE = "Interative Search"
-RELATIVE_PATH = join(".", "source", "interactive")
+RELATIVE_PATH = join(".", "src")
 
 # [ SEARCH ]
 SEARCH_ALGORITHMS = ["DFS", "BFS", "UCS", "Greedy", "A*"]
-SEARCH_STEP_COLDOWN = 1
+SEARCH_STEP_COLDOWN = 0.1
 
 MAP_SIZE = 30  # cols x rows
 
