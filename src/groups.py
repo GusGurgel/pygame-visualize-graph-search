@@ -8,8 +8,11 @@ class AllSprites(pygame.sprite.Group):
     def camera_movement(self):
         dx, dy = pygame.mouse.get_rel()
         if pygame.mouse.get_pressed()[0]:
+            pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
             self.camera_offset.x += dx
             self.camera_offset.y += dy
+        else:
+            pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
 
     def scale_cells(self, factor):
         cells = [x for x in self if x.type == "cell"]
