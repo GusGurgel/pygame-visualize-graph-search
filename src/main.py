@@ -49,10 +49,10 @@ class App:
         reset_button_rect = start_button_rect.copy()
         reset_button_rect.topleft += pygame.Vector2(start_button_rect.width+10, 0)
 
+
         step_button_rect = pygame.Rect(
             (start_button_rect.x, start_button_rect.y - start_button_rect.h - 10),
             (start_button_rect.w*2+10, start_button_rect.h)
-
         )
 
         algorithm_list_rect = step_button_rect.copy()
@@ -64,6 +64,18 @@ class App:
         
         heuristic_function_list_rect = cost_function_list_rect.copy()
         heuristic_function_list_rect.y -= algorithm_list_rect.h + 10
+        
+        inital_state_x_rect = heuristic_function_list_rect.copy()
+        inital_state_x_rect.y -= algorithm_list_rect.h + 10
+        
+        inital_state_y_rect = inital_state_x_rect.copy()
+        inital_state_y_rect.y -= algorithm_list_rect.h + 10
+        
+        objective_state_x_rect = inital_state_y_rect.copy()
+        objective_state_x_rect.y -= algorithm_list_rect.h + 10
+        
+        objective_state_y_rect = objective_state_x_rect.copy()
+        objective_state_y_rect.y -= algorithm_list_rect.h + 10
 
         self.start_button = pygame_gui.elements.UIButton(
             start_button_rect,
@@ -103,6 +115,35 @@ class App:
             heuristic_function_list_rect,
             self.ui_manager
         )
+        
+        self.inital_state_x = pygame_gui.elements.UIHorizontalSlider(
+            inital_state_x_rect, 
+            self.grid.inital_pos[0], 
+            (0, 30),
+            self.ui_manager
+        )
+        
+        self.inital_state_y = pygame_gui.elements.UIHorizontalSlider(
+            inital_state_y_rect, 
+            self.grid.inital_pos[1], 
+            (0, 30),
+            self.ui_manager
+        )
+        
+        self.objective_state_x = pygame_gui.elements.UIHorizontalSlider(
+            objective_state_x_rect, 
+            self.grid.objetive_pos[0], 
+            (0, 30),
+            self.ui_manager
+        )
+        
+        self.objective_state_y = pygame_gui.elements.UIHorizontalSlider(
+            objective_state_y_rect, 
+            self.grid.objetive_pos[1], 
+            (0, 30),
+            self.ui_manager
+        )
+
 
     def handle_scale_coldown(self, dt):
         if not self.scaled:
@@ -149,7 +190,30 @@ class App:
             
             self.start_button.set_text("start")
             self.grid.abort_search()
+        if event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.inital_state_x:
+                self.grid.inital_pos = (
+                    self.inital_state_x.get_current_value(),
+                    self.grid.inital_pos[1]
+                )
+            elif event.ui_element == self.inital_state_y:
+                self.grid.inital_pos = (
+                    self.grid.inital_pos[0],
+                    self.inital_state_y.get_current_value()
+                )
+            elif event.ui_element == self.objective_state_x:
+                self.grid.objetive_pos = (
+                    self.objective_state_x.get_current_value(),
+                    self.grid.objetive_pos[1]
+                )
+            elif event.ui_element == self.objective_state_y:
+                self.grid.objetive_pos = (
+                    self.grid.objetive_pos[0],
+                    self.objective_state_y.get_current_value()
+                )
 
+            self.start_button.set_text("start")
+            self.grid.abort_search()
 
     def run(self):
         while self.running:
