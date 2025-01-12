@@ -26,8 +26,8 @@ class Grid():
         Node.cost_function = NODE_COST_FUNCTIONS[0]
         Node.heuristic_function = NODE_HEURISTIC_FUNCTIONS[0]
 
-        self.inital_pos = (0, 0)
-        self.objetive_pos = (2, 2)
+        self.inital_pos = (15, 15)
+        self.objetive_pos = (15, 16)
         self.current_node = None
         self.result_node = None
         self.visited = []
